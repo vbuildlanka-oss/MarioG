@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarioG - Play & Save Your Score</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ============ AUTH SCREEN ============ -->
+    <section id="auth-screen" class="screen">
+      <div class="auth-card">
+        <h1 class="logo">🍄 MARIO<span>G</span></h1>
+        <p class="tagline">Login to play and save your high scores!</p>
+
+        <div class="tabs">
+          <button id="tab-login" class="tab active" type="button">Login</button>
+          <button id="tab-register" class="tab" type="button">Sign Up</button>
+        </div>
+
+        <form id="auth-form" autocomplete="off">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" placeholder="e.g. super_plumber"
+                 minlength="3" maxlength="20" required />
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="At least 6 characters"
+                 minlength="6" required />
+
+          <p id="auth-error" class="error" role="alert"></p>
+
+          <button id="auth-submit" class="btn-primary" type="submit">Login</button>
+        </form>
+
+        <p class="hint" id="auth-hint">New here? <a href="#" id="switch-to-register">Create an account</a></p>
+      </div>
+    </section>
+
+    <!-- ============ GAME SCREEN ============ -->
+    <section id="game-screen" class="screen hidden">
+      <header class="topbar">
+        <div class="brand">🍄 MARIO<span>G</span></div>
+        <div class="hud">
+          <span class="hud-item">👤 <b id="hud-user">-</b></span>
+          <span class="hud-item">Score: <b id="hud-score">0</b></span>
+          <span class="hud-item">🪙 <b id="hud-coins">0</b></span>
+          <span class="hud-item">❤️ <b id="hud-lives">3</b></span>
+          <span class="hud-item">🏁 Lvl <b id="hud-level">1</b></span>
+          <span class="hud-item best">🏆 Best: <b id="hud-best">0</b></span>
+        </div>
+        <button id="logout-btn" class="btn-ghost" type="button">Logout</button>
+      </header>
+
+      <div class="stage">
+        <canvas id="game" width="800" height="400"></canvas>
+
+        <!-- Overlay shown before start / after game over -->
+        <div id="overlay" class="overlay">
+          <div class="overlay-box">
+            <h2 id="overlay-title">Ready?</h2>
+            <p id="overlay-text">Reach the flag 🏁 without running out of lives!</p>
+            <button id="start-btn" class="btn-primary" type="button">Start Game</button>
+            <p id="save-status" class="save-status"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-help">
+        <span><b>←</b> / <b>A</b> move left</span>
+        <span><b>→</b> / <b>D</b> move right</span>
+        <span><b>Space</b> / <b>↑</b> / <b>W</b> jump</span>
+        <span>Stomp enemies, grab coins, reach the 🏁 flag!</span>
+      </div>
+
+      <div class="leaderboard-panel">
+        <h3>🏆 Leaderboard</h3>
+        <ol id="leaderboard-list"><li class="lb-empty">Loading…</li></ol>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
