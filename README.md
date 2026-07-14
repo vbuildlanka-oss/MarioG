@@ -33,6 +33,31 @@ file is created automatically on first run.
 > Optional: set `PORT` to change the port and `JWT_SECRET` to keep sessions valid
 > across restarts. Both are optional.
 
+## Play online for free (optional)
+
+MarioG runs as a normal, always-on Node server, so any free host that runs a
+long-lived Node process works. No code changes needed — the host just runs
+`npm install` then `npm start`.
+
+**Render (free tier) — easiest:**
+1. Push this repo to GitHub (already done if you're reading this there).
+2. Go to [render.com](https://render.com), create a **New Web Service**, and connect the repo.
+3. Settings: **Build Command** `npm install`, **Start Command** `npm start`.
+4. (Recommended) Add an environment variable `JWT_SECRET` set to any long random
+   string, so login sessions stay valid across restarts.
+5. Deploy — Render gives you a free public URL.
+
+Other free "runs-a-normal-server" hosts that work the same way: **Railway**,
+**Fly.io**, **Cyclic**, or any VPS.
+
+> ⚠️ **Note on free tiers & saved scores:** This app saves scores to a local file
+> (`data/mario.json`). On most free hosts the disk is *ephemeral* — it resets when
+> the app redeploys or goes to sleep, so scores can be wiped on those events. That's
+> fine for testing. To make scores survive permanently online you'd either attach a
+> **persistent disk/volume** (Fly.io offers a free one; Render offers it as a paid
+> add-on) or switch the storage layer to a free hosted database. Running **locally**,
+> scores persist permanently with no extra setup.
+
 ## How to play
 
 - **← / A** — move left

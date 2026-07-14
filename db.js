@@ -57,8 +57,15 @@ function flush() {
 }
 
 load();
-// Make sure any pending write is flushed on shutdown.
+// Make sure any pending write is flushed on shutdown (normal exit or when
+// the server is stopped with Ctrl+C / a termination signal).
 process.on('exit', () => saveTimer && flush());
+for (const signal of ['SIGINT', 'SIGTERM']) {
+  process.on(signal, () => {
+    if (saveTimer) flush();
+    process.exit(0);
+  });
+}
 
 // --- User operations ------------------------------------------------------
 function createUser(username, passwordHash) {

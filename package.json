@@ -1,7 +1,7 @@
 {
   "name": "mario-g",
   "version": "1.0.0",
-  "description": "A simple Mario-style platformer with login and persistent high scores. Built with 100% free & open-source tools. Zero local setup required beyond Node.js.",
+  "description": "A simple Mario-style platformer with login and persistent high scores. Built with 100% free & open-source tools. Zero setup required beyond Node.js.",
   "main": "server.js",
   "type": "commonjs",
   "engines": {
