@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="32" fill="#5c94fc"/>
+  <rect x="48" y="160" width="160" height="48" rx="4" fill="#c84c0c"/>
+  <rect x="48" y="112" width="40" height="48" rx="4" fill="#c84c0c"/>
+  <rect x="168" y="112" width="40" height="48" rx="4" fill="#c84c0c"/>
+  <!-- Mario hat -->
+  <rect x="100" y="50" width="56" height="20" rx="4" fill="#e52521"/>
+  <rect x="88" y="62" width="80" height="12" rx="2" fill="#e52521"/>
+  <!-- Mario face -->
+  <rect x="96" y="74" width="64" height="36" rx="4" fill="#ffcc99"/>
+  <!-- Eyes -->
+  <rect x="110" y="82" width="8" height="10" rx="2" fill="#000"/>
+  <rect x="138" y="82" width="8" height="10" rx="2" fill="#000"/>
+  <!-- Body -->
+  <rect x="96" y="110" width="64" height="24" rx="4" fill="#1560bd"/>
+  <rect x="100" y="134" width="24" height="26" rx="4" fill="#1560bd"/>
+  <rect x="132" y="134" width="24" height="26" rx="4" fill="#1560bd"/>
+  <!-- Coin -->
+  <circle cx="200" cy="60" r="20" fill="#fbd000" stroke="#c79100" stroke-width="3"/>
+  <text x="200" y="68" text-anchor="middle" font-size="24" font-weight="bold" fill="#7a4b00">$</text>
+  <!-- Mushroom -->
+  <ellipse cx="56" cy="52" rx="20" ry="16" fill="#e52521"/>
+  <rect x="46" y="52" width="20" height="16" rx="4" fill="#ffcc99"/>
+  <circle cx="48" cy="46" r="6" fill="#fff"/>
+  <circle cx="64" cy="46" r="6" fill="#fff"/>
+</svg>

@@ -1,0 +1,152 @@
+/* ============ MarioG Desktop Styles ============ */
+/* VBUILD(TM) */
+
+:root {
+  --sky: #5c94fc;
+  --sky-2: #6aa4ff;
+  --brick: #c84c0c;
+  --gold: #fbd000;
+  --green: #43b047;
+  --ink: #1a1a2e;
+  --panel: #ffffff;
+  --shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(180deg, var(--sky) 0%, var(--sky-2) 100%);
+  min-height: 100vh;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Logo / Brand ---------- */
+.brand {
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--brick), 6px 6px 0 rgba(0, 0, 0, 0.15);
+  font-size: 24px;
+}
+.brand span { color: var(--gold); }
+
+/* ============ TOP BAR ============ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--ink);
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+.hud { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; }
+.hud-item b { color: var(--gold); }
+.hud-item.best b { color: #7CFC00; }
+
+/* ============ GAME STAGE ============ */
+.stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 16px;
+}
+
+canvas {
+  background: var(--sky);
+  border: 5px solid var(--ink);
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ============ OVERLAY ============ */
+.overlay {
+  position: absolute;
+  inset: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 26, 46, 0.82);
+  border-radius: 10px;
+}
+.overlay.hidden { display: none; }
+
+.overlay-box {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 16px;
+  text-align: center;
+  border: 4px solid var(--ink);
+  max-width: 90%;
+}
+.overlay-box h2 { font-size: 32px; margin-bottom: 12px; }
+.overlay-box p { color: #444; margin-bottom: 22px; font-size: 15px; line-height: 1.5; }
+
+.btn-primary {
+  padding: 14px 32px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.08s;
+}
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,0.2); }
+
+.game-status {
+  min-height: 20px;
+  font-weight: 700;
+  color: var(--green);
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+/* ============ CONTROLS HELP ============ */
+.controls-help {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.controls-help b {
+  background: #fff;
+  color: var(--ink);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  text-align: center;
+  padding: 6px;
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+}

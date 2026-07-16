@@ -1,27 +1,78 @@
 {
-  "name": "mario-g",
+  "name": "mariog-desktop",
   "version": "1.0.0",
-  "description": "A simple Mario-style platformer with login and persistent high scores. Built with 100% free & open-source tools. Zero setup required beyond Node.js.",
-  "main": "server.js",
+  "description": "MarioG - A Super Mario-style platformer desktop game. Built by VBUILD(TM).",
+  "main": "main.js",
   "type": "commonjs",
+  "author": {
+    "name": "VBUILD Lanka",
+    "email": "vbuildlanka@gmail.com"
+  },
+  "license": "MIT",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win"
   },
   "keywords": [
     "mario",
     "game",
     "platformer",
-    "canvas"
+    "electron",
+    "desktop"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.7",
-    "express": "^4.21.0",
-    "jsonwebtoken": "^9.0.2"
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3",
+    "sharp": "^0.35.3"
+  },
+  "build": {
+    "appId": "com.vbuild.mariog",
+    "productName": "MarioG",
+    "copyright": "Copyright © 2024 VBUILD(TM) Lanka",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MarioG"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.png"
+    }
   }
 }
