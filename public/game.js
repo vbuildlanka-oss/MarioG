@@ -67,6 +67,7 @@
   let running = false;
 
   let state = null; // full game state, see resetGame()
+  let particles = []; // visual effects (coin pops, score text)
 
   let hooks = {
     onUpdate: function () {}, // called with {score, coins, lives, level}
@@ -119,6 +120,7 @@
 
   function resetGame() {
     const level = buildLevel(0);
+    particles = [];
     state = {
       levelIndex: 0,
       level,
@@ -167,6 +169,78 @@
       a.y < b.y + b.h &&
       a.y + a.h > b.y
     );
+  }
+
+  // ---- Particles / visual effects -----------------------------------------
+  function spawnCoinPop(x, y) {
+    // Coin that pops up from the block
+    particles.push({
+      type: 'coin',
+      x: x,
+      y: y,
+      vy: -8,
+      life: 40,
+    });
+    // Floating score text
+    particles.push({
+      type: 'text',
+      x: x,
+      y: y - 10,
+      vy: -1.5,
+      life: 50,
+      text: '+200',
+    });
+  }
+
+  function updateParticles() {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.life--;
+      p.y += p.vy;
+      if (p.type === 'coin') {
+        p.vy += 0.4; // gravity on the coin
+      }
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+  }
+
+  function drawParticles(cam) {
+    for (const p of particles) {
+      const sx = p.x - cam;
+      if (sx < -40 || sx > VIEW_W + 40) continue;
+
+      if (p.type === 'coin') {
+        // Spinning coin pop
+        const t = p.life / 3;
+        const squish = Math.abs(Math.cos(t));
+        ctx.save();
+        ctx.translate(sx, p.y);
+        ctx.scale(squish * 0.6 + 0.4, 1);
+        ctx.beginPath();
+        ctx.arc(0, 0, 10, 0, Math.PI * 2);
+        ctx.fillStyle = '#fbd000';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#c79100';
+        ctx.stroke();
+        ctx.restore();
+      } else if (p.type === 'text') {
+        // Floating score text
+        const alpha = Math.min(1, p.life / 20);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.font = 'bold 16px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#fff';
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 3;
+        ctx.strokeText(p.text, sx, p.y);
+        ctx.fillText(p.text, sx, p.y);
+        ctx.restore();
+      }
+    }
   }
 
   // ---- Physics & game logic ----------------------------------------------
@@ -218,6 +292,7 @@
             s.used = true;
             state.coins += 1;
             state.score += 200;
+            spawnCoinPop(s.x + s.w / 2, s.y);
             emitUpdate();
           }
         }
@@ -285,6 +360,9 @@
     // --- Camera follows player ---
     const target = p.x - VIEW_W / 2 + p.w / 2;
     state.camera = Math.max(0, Math.min(target, lvl.worldWidth - VIEW_W));
+
+    // --- Update visual particles ---
+    updateParticles();
   }
 
   function hurtPlayer(fell) {
@@ -374,6 +452,9 @@
     drawPlayer(state.player);
 
     ctx.restore();
+
+    // Particles (drawn in screen space after camera transform)
+    drawParticles(cam);
   }
 
   function drawBlock(s) {
